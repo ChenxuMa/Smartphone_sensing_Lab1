@@ -191,7 +191,7 @@ public class fragment extends Activity  implements SensorEventListener {
         data.setX(XAverage);
         data.setY(YAverage);
         data.setZ(ZAverage);
-        int k = 3;
+        int k = 2;
         KNN knn1 = null;
         try {
             knn1 = new KNN("motion_dataset.txt", this.getApplicationContext());
