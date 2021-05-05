@@ -1,71 +1,35 @@
 package com.example.example4;
 
-import java.util.List;
-import android.app.Activity;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiManager;
+import android.content.Intent;
+import android.support.annotation.Nullable;
+
 import android.os.Bundle;
-import android.content.Context;
+import android.app.Activity;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 
-/**
- * Smart Phone Sensing Example 4. Wifi received signal strength.
- */
-public class MainActivity extends Activity implements OnClickListener {
 
-    /**
-     * The wifi manager.
-     */
-    private WifiManager wifiManager;
-    /**
-     * The text view.
-     */
-    private TextView textRssi;
-    /**
-     * The button.
-     */
-    private Button buttonRssi;
 
+public class MainActivity extends Activity {
+
+    private Button start;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        start=(Button) findViewById(R.id.start_button);
 
-        // Create items.
-        textRssi = (TextView) findViewById(R.id.textRSSI);
-        buttonRssi = (Button) findViewById(R.id.buttonRSSI);
-        // Set listener for the button.
-        buttonRssi.setOnClickListener(this);
-    }
+        start.setOnClickListener(new View.OnClickListener(){
 
-    // onResume() registers the accelerometer for listening the events
-    protected void onResume() {
-        super.onResume();
-    }
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(MainActivity.this, fragment.class);
 
-    // onPause() unregisters the accelerometer for stop listening the events
-    protected void onPause() {
-        super.onPause();
-    }
 
-    @Override
-    public void onClick(View v) {
-        // Set text.
-        textRssi.setText("\n\tScan all access points:");
-        // Set wifi manager.
-        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        // Start a wifi scan.
-        wifiManager.startScan();
-        // Store results in a list.
-        List<ScanResult> scanResults = wifiManager.getScanResults();
-        // Write results to a label
-        for (ScanResult scanResult : scanResults) {
-            textRssi.setText(textRssi.getText() + "\n\tBSSID = "
-                    + scanResult.BSSID + "    RSSI = "
-                    + scanResult.level + "dBm");
-        }
+                startActivity(intent);
+            }
+        });
+
     }
 }
